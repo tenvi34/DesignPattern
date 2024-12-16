@@ -17,21 +17,17 @@ public class BikeController : MonoBehaviour
 
     public Direction CurrentTurnDirection { get; private set; }
 
-    private IBikeState
-        _startState, _stopState, _turnState;
+    private IBikeState _startState, _stopState, _turnState;
 
     private BikeStateContext _bikeStateContext;
 
     private void Start()
     {
-        _bikeStateContext = new BikeStateContext(this);
+        _bikeStateContext = gameObject.AddComponent<BikeStateContext>();
 
-        _startState =
-            gameObject.AddComponent<BikeStartState>();
-        _stopState =
-            gameObject.AddComponent<BikeStopState>();
-        _turnState =
-            gameObject.AddComponent<BikeTurnState>();
+        _startState = gameObject.AddComponent<BikeStartState>();
+        _stopState = gameObject.AddComponent<BikeStopState>();
+        _turnState = gameObject.AddComponent<BikeTurnState>();
 
         _bikeStateContext.Transition(_stopState);
     }
