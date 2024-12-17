@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class BikeController : MonoBehaviour
 {
     public float maxSpeed = 2.0f;
     public float turnDistance = 2.0f;
+
+    private string _status;
 
     public float CurrentSpeed { get; set; }
 
@@ -35,16 +38,35 @@ public class BikeController : MonoBehaviour
     public void StartBike()
     {
         _bikeStateContext.Transition(_startState);
+        _status = "Started";
     }
 
     public void StopBike()
     {
         _bikeStateContext.Transition(_stopState);
+        _status = "Stopped";
     }
 
     public void Turn(Direction direction)
     {
         CurrentTurnDirection = direction;
         _bikeStateContext.Transition(_turnState);
+    }
+
+    private void OnEnable()
+    {
+        RaceEventBus.Subscribe(RaceEventType.START, StartBike);
+        RaceEventBus.Subscribe(RaceEventType.STOP, StopBike);
+    }
+
+    private void OnDisable()
+    {
+        RaceEventBus.UnSubscribe(RaceEventType.START, StartBike);
+        RaceEventBus.UnSubscribe(RaceEventType.STOP, StopBike);
+    }
+
+    private void OnGUI()
+    {
+        GUI.color = Color.green;
     }
 }

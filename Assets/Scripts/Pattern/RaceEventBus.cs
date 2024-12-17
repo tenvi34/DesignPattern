@@ -19,7 +19,7 @@ public class RaceEventBus
     // 이벤트 이름과 해당 이벤트의 타입을 관리하는 딕셔너리
     private static readonly IDictionary<RaceEventType, UnityEvent> Events = new Dictionary<RaceEventType, UnityEvent>();
 
-    // 이벤트에 리스너를 추가하는 메서드
+    // 이벤트에 리스너(구독자)를 추가하는 메서드
     public static void Subscribe(RaceEventType eventType, UnityAction listener)
     {
         UnityEvent thisEvent;
@@ -39,7 +39,7 @@ public class RaceEventBus
         }
     }
 
-    // 이벤트에서 리스너를 제거하는 메서드
+    // 이벤트에서 리스너(구독자)를 제거하는 메서드
     public static void UnSubscribe(RaceEventType type, UnityAction listener)
     {
         UnityEvent thisEvent;
