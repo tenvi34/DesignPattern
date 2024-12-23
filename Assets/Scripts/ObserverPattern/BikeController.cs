@@ -51,12 +51,14 @@ namespace ObserverPattern
                 Detach(_cameraController);
         }
 
+        // 엔진 시동
         private void StartEngine()
         {
             _isEngineOn = true;
             NotifyObservers();
         }
 
+        // 터보 상태 전환
         public void ToggleTurbo()
         {
             if (_isEngineOn)
@@ -64,6 +66,7 @@ namespace ObserverPattern
             NotifyObservers();
         }
         
+        // 데미지 입음
         public void TakeDamage(float damage)
         {
             health -= damage;
