@@ -1,35 +1,35 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HUDController : MonoBehaviour
+namespace Bike
 {
-    private bool _isDisplayOn;
-
-    private void DisplayHUD()
+    public class HUDController : MonoBehaviour
     {
-        _isDisplayOn = true;
-    }
+        private bool _isDisplayOn;
 
-    private void OnEnable()
-    {
-        RaceEventBus.Subscribe(RaceEventType.START, DisplayHUD);
-    }
-
-    private void OnDisable()
-    {
-        RaceEventBus.UnSubscribe(RaceEventType.START, DisplayHUD);
-    }
-
-    private void OnGUI()
-    {
-        if (_isDisplayOn)
+        private void DisplayHUD()
         {
-            if (GUILayout.Button("Stop Race"))
+            _isDisplayOn = true;
+        }
+
+        private void OnEnable()
+        {
+            RaceEventBus.Subscribe(RaceEventType.START, DisplayHUD);
+        }
+
+        private void OnDisable()
+        {
+            RaceEventBus.UnSubscribe(RaceEventType.START, DisplayHUD);
+        }
+
+        private void OnGUI()
+        {
+            if (_isDisplayOn)
             {
-                _isDisplayOn = false;
-                RaceEventBus.Publish(RaceEventType.STOP);
+                if (GUILayout.Button("Stop Race"))
+                {
+                    _isDisplayOn = false;
+                    RaceEventBus.Publish(RaceEventType.STOP);
+                }
             }
         }
     }

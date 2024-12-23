@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Bike;
 using UnityEngine;
 
 public interface IBikeState

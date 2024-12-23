@@ -1,43 +1,42 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class CilentEventBus : MonoBehaviour
+namespace Bike
 {
-    private bool _isButtonEnabled;
+    public class CilentEventBus : MonoBehaviour
+    {
+        private bool _isButtonEnabled;
     
-    void Start()
-    {
-        gameObject.AddComponent<HUDController>();
-        gameObject.AddComponent<CountdownTimer>();
-        gameObject.AddComponent<BikeController>();
-    }
-
-    private void OnEnable()
-    {
-        RaceEventBus.Subscribe(RaceEventType.STOP, Restart);
-    }
-
-    private void OnDisable()
-    {
-        RaceEventBus.UnSubscribe(RaceEventType.STOP, Restart);
-    }
-
-    private void Restart()
-    {
-        _isButtonEnabled = true;
-    }
-
-    private void OnGUI()
-    {
-        if (_isButtonEnabled)
+        void Start()
         {
-            if (GUILayout.Button("Start Countdown"))
+            gameObject.AddComponent<HUDController>();
+            gameObject.AddComponent<CountdownTimer>();
+            gameObject.AddComponent<BikeController>();
+        }
+
+        private void OnEnable()
+        {
+            RaceEventBus.Subscribe(RaceEventType.STOP, Restart);
+        }
+
+        private void OnDisable()
+        {
+            RaceEventBus.UnSubscribe(RaceEventType.STOP, Restart);
+        }
+
+        private void Restart()
+        {
+            _isButtonEnabled = true;
+        }
+
+        private void OnGUI()
+        {
+            if (_isButtonEnabled)
             {
-                _isButtonEnabled = false;
-                RaceEventBus.Publish(RaceEventType.COUNTDOWN);
+                if (GUILayout.Button("Start Countdown"))
+                {
+                    _isButtonEnabled = false;
+                    RaceEventBus.Publish(RaceEventType.COUNTDOWN);
+                }
             }
         }
     }

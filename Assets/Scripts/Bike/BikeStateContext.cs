@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Bike;
 using UnityEngine;
 
 // 오토바이의 현재 상태를 가리키는 public 속성을 노출시켜 모든 상태 변경 인식
