@@ -2,7 +2,7 @@
 
 namespace VisitorPattern
 {
-    public class BikeShield
+    public class BikeShield : MonoBehaviour, IBikeElement
     {
         public float health = 50.0f;
         
